@@ -2521,6 +2521,12 @@ class JarvisEel:
                     subprocess.run([sys.executable, "-m", "pip", "install", "llama-cpp-python", "--prefer-binary"], creationflags=flags)
                     from llama_cpp import Llama
 
+                try:
+                    import huggingface_hub
+                except ImportError:
+                    self.log("📦 Установка huggingface-hub...")
+                    subprocess.run([sys.executable, "-m", "pip", "install", "huggingface-hub"], creationflags=flags)
+
                 # 2. Model Configuration
                 # Priority 1: User's custom GGUF model path from settings
                 custom_model_path = self.settings.get("local_llm_path")
