@@ -62,8 +62,8 @@
 
 1. **Скачайте или клонируйте репозиторий:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/jarvis-ultimate.git
-   cd jarvis-ultimate
+   git clone https://github.com/YOUR_USERNAME/jarvis.git
+   cd jarvis
    ```
 
 2. **Запустите JARVIS:**
