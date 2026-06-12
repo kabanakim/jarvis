@@ -1,0 +1,6 @@
+{
+  "открой калькулятор": {
+    "action": "calc.exe",
+    "action_type": "program"
+  }
+}

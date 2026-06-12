@@ -1,0 +1,117 @@
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+*.egg
+
+# === Virtual Environments ===
+venv*/
+cosyvoice_env/
+.venv/
+
+# === AI Models (huge files — auto-downloaded) ===
+*.gguf
+*.pt
+*.bin
+*.safetensors
+pretrained_models/
+CosyVoice/
+cosyvoice_models/
+vosk-model*/
+vosk_model_temp/
+
+# === Vosk model archives ===
+vosk-model-ru*.zip
+
+# === Build artifacts ===
+build/
+dist/
+*.spec
+
+# === Logs ===
+*.log
+crash_report.txt
+run_output.txt
+
+# === TTS Cache ===
+jarvis_sounds/tts_cache/
+jarvis_sounds/torch_cache/
+jarvis_sounds/temp_*.mp3
+jarvis_sounds/silero_model.pt
+jarvis_sounds/openvoice_models/
+jarvis_sounds/qwen_tts_models/
+jarvis_sounds/xtts_references/
+temp_tts.mp3
+voice.mp3
+
+# === Temp / test files ===
+test_*.py
+test_*.wav
+*.lnk
+*.vbs
+ww.bat
+ww.txt
+
+# === SoX (auto-installed) ===
+sox/
+sox.zip
+sox_temp/
+
+# === IDE / Agent configs ===
+.agent/
+.cache/
+.claude/
+.codebuddy/
+.codex/
+.continue/
+.cursor/
+.gemini/
+.github/
+.kiro/
+.opencode/
+.qoder/
+.roo/
+.trae/
+.windsurf/
+.ffmpeg_shim/
+.mecabrc
+.system_ready
+
+# === Unrelated project files ===
+Agera-PvP-*.zip
+temp_resourcepack/
+convert_pack.py
+extract_hearts.py
+rename.py
+autoclicker.py
+index.html
+
+# === Old/backup versions ===
+jarvis.py
+jarvis_clean.py
+jarvis_fixed.py
+jarvis_fixed_backup.py
+jarvis_fixed_before_debug.py
+jarvis_pyqt6.py
+jarvis_patcher.py
+jarvis_debug_patcher.py.py
+jarvis_xtts_addon.py
+jarvis_auto_installer.py
+
+# === Misc installers / scripts ===
+check_voices.py
+download_vosk_model.py
+install_vosk_model.py
+verify_edge.py
+verify_jarvis_voice.py
+test_voice_variants.py
+test_vosk.py
+test_vosk_simple.py
+test_audio.py
+cosyvoice_install.bat
+cosyvoice_start.bat
+BUILD_EXE.bat
+
+# === Новая папка ===
+Новая папка/

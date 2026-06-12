@@ -1,0 +1,17 @@
+{
+  "тихо": {
+    "settings": {
+      "use_movie_sounds": false
+    },
+    "actions": [
+      { "type": "system", "action": "mute" }
+    ]
+  },
+  "работа": {
+    "actions": [
+      { "type": "url", "action": "https://calendar.google.com" },
+      { "type": "url", "action": "https://mail.google.com" }
+    ]
+  }
+}
+

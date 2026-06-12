@@ -1,0 +1,87 @@
+{
+  "открой браузер": {
+    "response": "как скажете",
+    "action": "https://www.google.com",
+    "action_type": "url"
+  },
+  "открой ютуб": {
+    "response": "как скажете",
+    "action": "https://www.youtube.com/",
+    "action_type": "url"
+  },
+  "youtube": {
+    "response": "как скажете",
+    "action": "https://www.youtube.com/",
+    "action_type": "url"
+  },
+  "открой вк": {
+    "response": "открываю вконтакте",
+    "action": "https://vk.com",
+    "action_type": "url"
+  },
+  "vk": {
+    "response": "открываю вконтакте",
+    "action": "https://vk.com",
+    "action_type": "url"
+  },
+  "дискорд": {
+    "response": "дискорд запущен",
+    "action": "https://discord.com",
+    "action_type": "url"
+  },
+  "discord": {
+    "response": "дискорд запущен",
+    "action": "https://discord.com",
+    "action_type": "url"
+  },
+  "ватсап": {
+    "response": "открываю ватсап веб",
+    "action": "https://web.whatsapp.com",
+    "action_type": "url"
+  },
+  "whatsapp": {
+    "response": "открываю ватсап веб",
+    "action": "https://web.whatsapp.com",
+    "action_type": "url"
+  },
+  "тикток": {
+    "response": "тикток открыт",
+    "action": "https://tiktok.com",
+    "action_type": "url"
+  },
+  "tiktok": {
+    "response": "тикток открыт",
+    "action": "https://tiktok.com",
+    "action_type": "url"
+  },
+  "инстаграм": {
+    "response": "открываю инстаграм",
+    "action": "https://instagram.com",
+    "action_type": "url"
+  },
+  "instagram": {
+    "response": "открываю инстаграм",
+    "action": "https://instagram.com",
+    "action_type": "url"
+  },
+  "гитхаб": {
+    "response": "ваш репозиторий готов",
+    "action": "https://github.com",
+    "action_type": "url"
+  },
+  "github": {
+    "response": "ваш репозиторий готов",
+    "action": "https://github.com",
+    "action_type": "url"
+  },
+  "чат гпт": {
+    "response": "искусственный интеллект к вашим услугам",
+    "action": "https://chatgpt.com",
+    "action_type": "url"
+  },
+  "chatgpt": {
+    "response": "искусственный интеллект к вашим услугам",
+    "action": "https://chatgpt.com",
+    "action_type": "url"
+  }
+}
