@@ -62,7 +62,7 @@
 
 1. **Скачайте или клонируйте репозиторий:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/jarvis.git
+   git clone https://github.com/kabanakim/jarvis.git
    cd jarvis
    ```
 
