@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS HUD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="/eel.js"></script>
+</head>
+
+<body>
+    <canvas id="particles"></canvas>
+    <div id="app">
+        <header class="integrated-header">
+            <div class="logo-container">
+                <div class="logo-glitch" data-text="JARVIS">JARVIS</div>
+                <span class="version-tag">v1.0 ULTIMATE</span>
+            </div>
+            <nav class="hud-tabs">
+                <div class="tab active" onclick="switchTab('home', this)">ГЛАВНАЯ</div>
+                <div class="tab" onclick="switchTab('chat', this)">ЧАТ</div>
+                <div class="tab" onclick="switchTab('commands', this)">КОМАНДЫ</div>
+                <div class="tab" onclick="switchTab('settings', this)">НАСТРОЙКИ</div>
+            </nav>
+        </header>
+
+        <main>
+            <!-- TAB: HOME -->
+            <div id="tab-home" class="tab-content">
+                <div class="hud-container">
+                    <div class="jarvis-hud">
+                        <div class="hud-ring ring-1"></div>
+                        <div class="hud-ring ring-2"></div>
+                        <div class="hud-ring ring-3"></div>
+                        <div class="hud-ring ring-4"></div>
+                        <div class="hud-ring ring-5"></div>
+                        <div class="hud-ring ring-6"></div>
+                        <div class="core-wrapper">
+                            <div class="core-ring-tech"></div>
+                            <div class="core-glow"></div>
+                            <div class="hud-core"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: CHAT -->
+            <div id="tab-chat" class="tab-content hidden">
+                <div class="chat-container">
+                    <h2>ПРОТОКОЛ ДИАЛОГА</h2>
+                    <div id="chat-history" class="chat-history">
+                        <!-- Messages will appear here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: COMMANDS -->
+            <div id="tab-commands" class="tab-content hidden">
+                <div class="commands-list">
+                    <h2>ДОСТУПНЫЕ КОМАНДЫ</h2>
+                    <div id="cmd-container">
+                        <div class="cmd-item" data-builtin="1"><span>Время</span> — «Джарвис, сколько времени?»</div>
+                        <div class="cmd-item" data-builtin="1"><span>Ютуб</span> — «Открой ютуб»</div>
+                        <div class="cmd-item" data-builtin="1"><span>Экран</span> — «Что ты видишь на экране?»</div>
+                        <div class="cmd-item" data-builtin="1"><span>Диктовка</span> — «Режим диктовки»</div>
+                        <div class="cmd-item" data-builtin="1"><span>Остановка</span> — «Джарвис, молчать»</div>
+                    </div>
+
+                    <div class="add-command-form">
+                        <h3>ДОБАВИТЬ КОМАНДУ</h3>
+                        <div class="form-row">
+                            <input type="text" id="new-cmd-key" placeholder="Ключевое слово (н-р: калькулятор)">
+                            <input type="text" id="new-cmd-action" placeholder="Путь к файлу или текст">
+                            <input type="file" id="file-selector" style="display: none;"
+                                onchange="handleFileSelect(event)">
+                            <button onclick="openFileSelector()" aria-label="Выбрать файл">+</button>
+                        </div>
+                        <div class="commands-buttons">
+                            <button onclick="addNewCommand()">ДОБАВИТЬ</button>
+                            <button onclick="editCommand()">РЕДАКТИРОВАТЬ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: SETTINGS -->
+            <div id="tab-settings" class="tab-content hidden">
+                <div class="settings-grid">
+                    <h2>КОНФИГУРАЦИЯ СИСТЕМЫ</h2>
+
+                    <div class="settings-section">
+                        <h3>
+                            <svg class="section-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.5-3 5.7V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.3C6.2 13.5 5 11.4 5 9a7 7 0 0 1 7-7z" />
+                                <path d="M9 21h6" />
+                                <path d="M10 21v1h4v-1" />
+                            </svg>
+                            ИСКУССТВЕННЫЙ ИНТЕЛЛЕКТ
+                        </h3>
+                        <div class="setting-row">
+                            <label>Локальный CLI (Qwen Code)</label>
+                            <input type="checkbox" id="check-qwen-cli" onchange="updateSettings()">
+                        </div>
+                        <div class="setting-row">
+                            <label>Онлайн мозг (Yandex AI Studio)</label>
+                            <input type="checkbox" id="check-online-ai" onchange="updateSettings()">
+                        </div>
+                        <div class="setting-row">
+                            <label>Yandex API Key</label>
+                            <input type="password" id="yandex-api-key" placeholder="API-ключ из AI Studio"
+                                onchange="updateSettings()" style="flex:1;min-width:0;">
+                        </div>
+                        <div class="setting-row">
+                            <label>Yandex Folder ID</label>
+                            <input type="text" id="yandex-folder-id" placeholder="b1g... (ID каталога в консоли)"
+                                onchange="updateSettings()" style="flex:1;min-width:0;">
+                        </div>
+                        <div class="setting-row">
+                            <label>Локальный мозг (Qwen/Custom)</label>
+                            <input type="checkbox" id="check-qwen-llm" onchange="updateSettings()">
+                        </div>
+                        <div class="setting-row">
+                            <label>Путь к GGUF модели</label>
+                            <input type="text" id="local-llm-path" placeholder="D:\path\to\model.gguf"
+                                onchange="updateSettings()" style="flex:1;min-width:0;">
+                        </div>
+                        <div class="setting-row">
+                            <label>GPU слои локальной ИИ (-1 / 0 / N)</label>
+                            <input type="number" id="local-llm-gpu-layers" value="-1" style="width:80px"
+                                onchange="updateSettings()">
+                        </div>
+                        <div class="setting-row">
+                            <label>Клонирование голоса (Qwen3)</label>
+                            <input type="checkbox" id="check-qwen" onchange="updateSettings()">
+                        </div>
+                        <div class="setting-row">
+                            <label>Клонирование голоса (CosyVoice)</label>
+                            <input type="checkbox" id="check-cosyvoice" onchange="updateSettings()">
+                        </div>
+                        <div class="setting-row">
+                            <label>Режим CosyVoice</label>
+                            <select id="cosyvoice-mode" onchange="updateSettings()">
+                                <option value="local">Локальный</option>
+                                <option value="api">Внешний сервер (API)</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <label>CosyVoice API URL</label>
+                            <input type="text" id="cosyvoice-api-url" placeholder="http://127.0.0.1:9880"
+                                onchange="updateSettings()" style="flex:1;min-width:0;">
+                        </div>
+                        <div class="setting-row">
+                            <label>Модель CosyVoice</label>
+                            <input type="text" id="cosyvoice-model" placeholder="FunAudioLLM/CosyVoice-300M-Instruct"
+                                onchange="updateSettings()" style="flex:1;min-width:0;">
+                        </div>
+                        <div class="setting-row">
+                            <label>Реплика CosyVoice (путь)</label>
+                            <input type="text" id="cosyvoice-reference-path" placeholder="C:\path\to\voice.mp3"
+                                onchange="updateSettings()" style="flex:1;min-width:0;">
+                        </div>
+                        <div class="setting-row">
+                            <div class="ai-status">СТАТУС: <span id="nn-status-text" class="status-ok">READY</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>
+                            <svg class="section-icon" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="3" />
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                            </svg>
+                            ПАРАМЕТРЫ
+                        </h3>
+                        <div class="setting-row">
+                            <label>Звуки из фильма</label>
+                            <input type="checkbox" id="check-movie" onchange="updateSettings()">
+                        </div>
+                        <div class="setting-row">
+                            <label>Оффлайн распознавание (Vosk)</label>
+                            <input type="checkbox" id="check-vosk" onchange="updateSettings()">
+                        </div>
+                        <div class="setting-row">
+                            <label>Подтверждать опасные команды</label>
+                            <input type="checkbox" id="check-confirm" onchange="updateSettings()">
+                        </div>
+                        <div class="setting-row">
+                            <label>Память Qwen (кол-во диалогов)</label>
+                            <input type="number" id="memory-turns" min="0" max="30" value="6" style="width:80px"
+                                onchange="updateSettings()">
+                        </div>
+                        <div class="setting-row">
+                            <label>Запуск при включении ПК</label>
+                            <input type="checkbox" id="check-autostart" onchange="toggleAutostart()">
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>
+                            <svg class="section-icon" viewBox="0 0 24 24">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                            </svg>
+                            ЭНЕРГОСБЕРЕЖЕНИЕ
+                        </h3>
+                        <div class="setting-row">
+                            <label>Режим энергосбережения</label>
+                            <input type="checkbox" id="check-power-saving" onchange="updateSettings()">
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>
+                            <svg class="section-icon" viewBox="0 0 24 24">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg>
+                            РЕЖИМЫ ПРОИЗВОДИТЕЛЬНОСТИ
+                        </h3>
+                        <div class="setting-row">
+                            <label>Режим производительности</label>
+                            <select id="performance-mode" onchange="updateSettings()">
+                                <option value="eco">Экономичный</option>
+                                <option value="balanced">Сбалансированный</option>
+                                <option value="performance">Высокая производительность</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>
+                            <svg class="section-icon" viewBox="0 0 24 24">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                <polyline points="9 22 9 12 15 12 15 22" />
+                            </svg>
+                            УМНЫЙ ДОМ
+                        </h3>
+                        <div class="setting-row">
+                            <label>API URL умного дома</label>
+                            <input type="text" id="smart-home-api-url" onchange="updateSettings()"
+                                placeholder="http://homeassistant.local:8123/api">
+                        </div>
+                        <div class="setting-row">
+                            <label>Токен доступа</label>
+                            <input type="password" id="smart-home-access-token" onchange="updateSettings()"
+                                placeholder="Введите токен доступа">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="response-overlay" id="response-overlay">
+                <p id="response-text"></p>
+            </div>
+
+            <!-- SYSTEM LOG OVERLAY -->
+            <div id="log-list" class="system-logs"></div>
+        </main>
+
+        <footer>
+            <div class="action-buttons">
+                <button id="toggle-mic" class="btn-mic" onclick="toggleMic()">
+                    <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+                            <path
+                                d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+                        </svg></span>
+                    РЕЖИМ ОЖИДАНИЯ
+                </button>
+                <div class="pulsing-indicator"></div>
+            </div>
+
+            <div class="system-stats">
+                <div class="stat-item">
+                    <span class="dot"></span>
+                    <div class="stat-info">
+                        <span class="stat-label">Микрофон</span>
+                        <span class="stat-value" id="mic-status">USB Audio</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="dot"></span>
+                    <div class="stat-info">
+                        <span class="stat-label">Нейросети</span>
+                        <span class="stat-value" id="ai-status">Vosk + LLaMA</span>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

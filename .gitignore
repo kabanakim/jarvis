@@ -43,7 +43,6 @@ jarvis_sounds/openvoice_models/
 jarvis_sounds/qwen_tts_models/
 jarvis_sounds/xtts_references/
 temp_tts.mp3
-voice.mp3
 
 # === Temp / test files ===
 test_*.py
@@ -85,7 +84,6 @@ convert_pack.py
 extract_hearts.py
 rename.py
 autoclicker.py
-index.html
 
 # === Old/backup versions ===
 jarvis.py
